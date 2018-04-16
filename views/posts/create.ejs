@@ -1,0 +1,14 @@
+<%- include('../layout/header') %>
+    <form id="create-form">
+		  <div class="form-group">
+		    <label for="posts-title">标题</label>
+		    <input type="text" class="form-control" id="posts-title" placeholder="用户名">
+		  </div>
+
+		  <div class="form-group">
+		  	<label for="posts-content">内容</label>
+		  	<textarea class="form-control" rows="10" id="posts-content"></textarea>
+		  </div> 
+		  <button type="button" class="btn btn-success btn-lg btn-block">发布</button>
+		</form>
+<%- include('../layout/footer') %>

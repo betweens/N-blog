@@ -1,8 +1,27 @@
-<!DOCTYPE html>
-<html>
+<!doctype html>
+<html lang="en">
   <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- 最新版本的 Bootstrap 核心 CSS 文件 -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
     <style type="text/css">
-      body {padding: 50px;font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;}
+      .marin10 {
+        margin-right: 10px;
+      }
     </style>
+    <title><%= blog.title %></title>
   </head>
   <body>
+  	<div class="container">
+  		<div class="page-header">
+			  <h1><%= blog.title %> <small><%= blog.description %></small></h1>
+			</div>
+      <% if (success) {%>
+        <div class="alert alert-success" role="alert"><%= success %></div>
+      <%}%>
+
+      <% if (error) {%>
+        <div class="alert alert-danger" role="alert"><%= error %></div>
+      <%}%>

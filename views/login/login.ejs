@@ -1,13 +1,13 @@
 <%- include('../layout/header') %>
-    <form id="login-form">
+    <form id="login-form" method="post" action="./signin">
 		  <div class="form-group">
 		    <label for="username">用户名</label>
-		    <input type="text" class="form-control" id="username" placeholder="用户名">
+		    <input type="text" class="form-control" id="username" name="username" placeholder="用户名">
 		  </div>
 		  <div class="form-group">
 		    <label for="pwd-one">密码</label>
-		    <input type="password" class="form-control" id="pwd-one" placeholder="输入密码">
+		    <input type="password" class="form-control" id="pwd" name="pwd" placeholder="输入密码">
 		  </div>
-		  <button type="button" class="btn btn-success btn-lg btn-block">登录</button>
+		  <button type="submit" class="btn btn-success btn-lg btn-block">登录</button>
 		</form>
 <%- include('../layout/footer') %>

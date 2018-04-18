@@ -7,7 +7,8 @@
 		  	<span class="text-muted marin10"><%= post.created_at %></span>
 		  	<span class="marin10 text-muted">浏览(<%= post.pv %>)</span>
 		  	<span class="marin10 text-muted">评论(100)</span><span class="marin10 caret"></span>
-		  	<a href="./<%= post._id %>/edit">编辑</a>
+		  	<a class="marin10" href="./<%= post._id %>/edit">编辑</a>
+		  	<% if (post.deletePost) {%><a href="./<%= post._id %>/remove">删除</a> <%}%>
 		  </div>
 		</div>
   <% }) %>

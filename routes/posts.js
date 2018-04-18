@@ -23,7 +23,7 @@ router.get('/create', checkLogin, function (req, res, next) {
 router.post('/create', checkLogin, function (req, res, next) {
   const title = req.fields.title;
   const content = req.fields.content;
-  const author = req.session.user._id
+  const author = req.session.user._id;
 
   try {
 
@@ -61,12 +61,16 @@ router.post('/create', checkLogin, function (req, res, next) {
 router.get('/:postId', function (req, res, next) {
   // res.send('文章详情页');
   const postId = req.params.postId;
+  let authorId = '';
+
+  if (req.session.user) authorId = req.session.user._id;
 
   Promise.all([
     PostsModel.getPostById(postId), // 获取文章信息
     PostsModel.incPv(postId)// pv 加 1
   ]).then(function (result) { 
       const post = result[0];
+      if (post.author._id.toString() === authorId.toString()) post.deletePost = true;
       if (!post) throw new Error('该文章不存在')
       res.render('posts/postsDetail', {result: [post] });
     }).catch(next);
@@ -85,8 +89,6 @@ router.get('/:postId/edit', checkLogin, function (req, res, next) {
       if (author.toString() !== post.author._id.toString()) {
         throw new Error('权限不足')
       }
-
-      console.log(post);
 
       res.render('posts/edit', {
         post: post
@@ -134,7 +136,18 @@ router.post('/:postId/edit', checkLogin, function (req, res, next) {
 
 // GET /posts/:postId/remove 删除一篇文章
 router.get('/:postId/remove', checkLogin, function (req, res, next) {
-  res.send('删除文章');
+  const postId = req.params.postId;
+  const author = req.session.user._id;
+  
+  PostsModel.getRawPostById(postId).then(function (post) {
+    if (!post) throw new Error('文章不存在')
+    if (post.author._id.toString() !== author.toString()) throw new Error('没有权限')
+    PostsModel.delPostById(postId).then(function () {
+      req.flash('success', '删除文章成功')
+      // 删除成功后跳转到主页
+      res.redirect('/posts')
+    }).catch(next);
+  })
 });
 
 module.exports = router;

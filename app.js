@@ -51,8 +51,8 @@ app.use(function (req, res, next) {
   res.locals.user = req.session.user;
   res.locals.success = req.flash('success').toString();
   res.locals.error = req.flash('error').toString();
-  console.log('res.locals.error:' + res.locals.error);
-  console.log('res.locals.success:' + res.locals.success);
+  // console.log('res.locals.error:' + res.locals.error);
+  // console.log('res.locals.success:' + res.locals.success);
   next();
 })
 
